@@ -12,7 +12,7 @@
    import useClickOutside from "@/hooks/useClickOutside";
 
    export default defineComponent({
-      name: "CustomDropdown",
+      name: "Dropdown",
 
       props: {
          title: {

@@ -24,3 +24,13 @@
 - 父子组件通讯
 - 事件监听器
 - mitt
+- SPA应用实现原理
+- history hash route
+- vue-router
+- pre标签
+- url: params, query, hash
+- 数据结构如何设计
+- 状态工具是什么 分析share的数据 vuex redux mobex
+    - 一个类似object的全局数据结构，成为store
+    - 只能调用一些特殊的方法来实现数据修改
+- router meta
