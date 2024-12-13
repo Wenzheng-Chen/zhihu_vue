@@ -46,7 +46,6 @@
             if (result) {
                const { column } = store.state.user;
                if (column) {
-                  console.log("test", titleVal.value, contentVal.value);
                   const newPost: PostProps = {
                      _id: new Date().getTime().toString(),
                      title: titleVal.value,

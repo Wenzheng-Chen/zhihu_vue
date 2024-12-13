@@ -51,7 +51,7 @@
                store
                   .dispatch("loginAndFetch", payload)
                   .then((data) => {
-                     createMessage("登陆成功 2秒跳转首页", "success");
+                     createMessage("登陆成功 2秒跳转首页", "success", 2000);
                      setTimeout(() => {
                         router.push("/");
                      }, 2000);
