@@ -20,6 +20,7 @@
    import ValidateInput, { RulesProp } from "../components/ValidateInput.vue";
    import ValidateForm from "../components/ValidateForm.vue";
    import { GlobalDataProps } from "@/store";
+   import createMessage from "@/components/Message/createMessage";
 
    export default defineComponent({
       name: "Login",
@@ -43,8 +44,21 @@
          ];
          const onFormSubmit = (result: boolean) => {
             if (result) {
-               router.push("/");
-               store.commit("login");
+               const payload = {
+                  email: emailVal.value,
+                  password: passwordVal.value
+               };
+               store
+                  .dispatch("loginAndFetch", payload)
+                  .then((data) => {
+                     createMessage("登陆成功 2秒跳转首页", "success");
+                     setTimeout(() => {
+                        router.push("/");
+                     }, 2000);
+                  })
+                  .catch((e) => {
+                     console.log(e);
+                  });
             }
          };
          return {

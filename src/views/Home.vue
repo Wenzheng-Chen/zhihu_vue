@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-   import { defineComponent, computed } from "vue";
+   import { defineComponent, computed, onMounted } from "vue";
    import { useStore } from "vuex";
    import ColumnList from "../components/ColumnList.vue";
    import { GlobalDataProps } from "@/store";
@@ -28,8 +28,12 @@
       },
       setup() {
          const store = useStore<GlobalDataProps>();
+
          const list = computed(() => store.state.columns);
          const biggerColumnsLen = computed(() => store.getters.biggerColumnsLen);
+         onMounted(() => {
+            store.dispatch("fetchColumns");
+         });
          return {
             list,
             biggerColumnsLen

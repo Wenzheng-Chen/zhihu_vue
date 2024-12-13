@@ -26,9 +26,10 @@
    import { defineComponent, onMounted, PropType, reactive } from "vue";
    import { emitter } from "./ValidateForm.vue";
    interface RuleProp {
-      type: "required" | "email" | "min" | "max";
+      type: "required" | "email" | "min" | "max" | "custom";
       message: string;
       length?: number;
+      validator?: () => boolean;
    }
    export type RulesProp = RuleProp[];
    export type TagType = "input" | "textarea";
@@ -77,6 +78,9 @@
                         if (rule.length !== undefined && inputRef.val.length > rule.length) {
                            passed = false;
                         }
+                        break;
+                     case "custom":
+                        passed = rule.validator ? rule.validator() : true;
                         break;
                      default:
                         break;

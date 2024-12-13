@@ -34,3 +34,35 @@
     - 一个类似object的全局数据结构，成为store
     - 只能调用一些特殊的方法来实现数据修改
 - router meta
+- 前后端分离开发
+- RESTful API
+    - endpoints
+        - https://api.example.com/teams
+    - verbs
+        - GET /teams 
+        - POST /teams
+        - GET /teams/ID
+        - PUT /teams/ID 更新，提供全部信息
+        - PATCH /teams/ID 更新，提供部分信息
+        - DELETE /teams/ID
+- HTTP Method
+- HTTP 状态码
+- swagger 
+- axios
+- axios.interceptors, loading
+- vuex: actions
+- style scoped
+- Teleport 改造 loading 渲染到container之外
+- JWT
+- axios headers
+- 登录状态持久化， 
+    - 初始化store时，localStorage.getItem("token") ==> 
+        - App第一次加载 ==> 
+            - token是否存在并且未登陆 ==> 
+                - 请求成功 ==> 显示用户信息
+                - 请求失败 伪造 或者 过期 ==> 提示错误并清空localstorage token
+
+- 全局组件
+- 使用函数动态动态创建组件 createApp
+- Vnode virtualDom
+- 动态创建的组件，返回方法 比如destory

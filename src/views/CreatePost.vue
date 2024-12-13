@@ -24,7 +24,7 @@
    import { RulesProp } from "@/components/ValidateInput.vue";
    import { useRouter } from "vue-router";
    import { GlobalDataProps } from "@/store";
-   import { PostProps } from "@/testData";
+   import { PostProps } from "@/components/PostList.vue";
    import { defineComponent, ref } from "vue";
    import { useStore } from "vuex";
 
@@ -44,18 +44,18 @@
 
          const onFormSubmit = (result: boolean) => {
             if (result) {
-               const { columnId } = store.state.user;
-               if (columnId) {
+               const { column } = store.state.user;
+               if (column) {
                   console.log("test", titleVal.value, contentVal.value);
                   const newPost: PostProps = {
-                     id: new Date().getTime(),
+                     _id: new Date().getTime().toString(),
                      title: titleVal.value,
                      content: contentVal.value,
-                     columnId: columnId,
+                     column: column,
                      createdAt: new Date().toLocaleString()
                   };
                   store.commit("createPost", newPost);
-                  router.push({ name: "column", params: { id: columnId } });
+                  router.push({ name: "column", params: { id: column } });
                }
             }
          };
