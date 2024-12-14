@@ -2,10 +2,16 @@ import { Commit, createStore } from "vuex";
 import { ColumnProps } from "./components/ColumnList.vue";
 import { PostProps } from "./components/PostList.vue";
 import axios from "axios";
+
+export interface ResponseType<P> {
+   code: number;
+   message: string;
+   data: P;
+}
 export interface UserProps {
    isLogin: boolean;
    nickName?: string;
-   _id?: number;
+   _id?: string;
    column?: string;
    email?: string;
 }
@@ -69,6 +75,12 @@ const store = createStore<GlobalDataProps>({
          localStorage.setItem("token", token);
          axios.defaults.headers.common.Authorization = `Bearer ${token}`;
       },
+      logout(state) {
+         state.token = "";
+         state.user = { isLogin: false };
+         localStorage.removeItem("token");
+         delete axios.defaults.headers.common.Authorization;
+      },
       fetchCurrentUser(state, rawData) {
          state.user = { isLogin: true, ...rawData.data };
          return state.user;
@@ -76,19 +88,22 @@ const store = createStore<GlobalDataProps>({
    },
    actions: {
       fetchColumns({ commit }) {
-         getAndCommit("/columns", "fetchColumns", commit);
+         return getAndCommit("/columns", "fetchColumns", commit);
       },
       fetchColumn({ commit }, cid) {
-         getAndCommit(`/columns/${cid}`, "fetchColumn", commit);
+         return getAndCommit(`/columns/${cid}`, "fetchColumn", commit);
       },
       fetchPosts({ commit }, cid) {
-         getAndCommit(`/columns/${cid}/posts`, "fetchPosts", commit);
+         return getAndCommit(`/columns/${cid}/posts`, "fetchPosts", commit);
       },
       fetchCurrentUser({ commit }) {
          return getAndCommit(`user/current`, "fetchCurrentUser", commit);
       },
       login({ commit }, payload) {
          return postAndCommit("/user/login", "login", commit, payload);
+      },
+      create({ commit }, payload) {
+         return postAndCommit("/posts", "createPost", commit, payload);
       },
       loginAndFetch({ dispatch }, loginData) {
          return dispatch("login", loginData).then(() => {

@@ -44,8 +44,7 @@
       setup() {
          const store = useStore<GlobalDataProps>();
          const logout = () => {
-            localStorage.getItem("token") && localStorage.removeItem("token");
-            store.state.user = { isLogin: false };
+            store.commit("logout");
             router.push("/");
          };
          return { logout };

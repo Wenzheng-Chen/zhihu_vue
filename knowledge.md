@@ -66,3 +66,18 @@
 - 使用函数动态动态创建组件 createApp
 - Vnode virtualDom
 - 动态创建的组件，返回方法 比如destory
+- 上传功能
+    - 格式检查 beforeUpload
+    - uploading
+        - fileUploaded
+        - uploadedError
+    - 原理
+        - form 
+            - multipart/form-data 二进制数据
+- 自定义上传的样式，曲线救国 - 隐藏-button点击-ref点击
+- ajax
+- scoped slots
+- 访问路由
+    - 地址栏直接访问
+    - 点链接访问
+    - 画路径图
